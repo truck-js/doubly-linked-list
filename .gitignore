@@ -1,0 +1,10 @@
+.config/
+.node-gyp/
+.npm/
+
+coverage/
+jest_modules/
+lib/
+node_modules/
+
+.ash_history
