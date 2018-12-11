@@ -54,79 +54,67 @@ class DoublyLinkedList {
     this.listSize += 1;
   }
 
-  // insertAfterTwo(value, after) {
-  //   const comparator = isFunction(after) ? after : defaultComparator(after);
-  //   const node = new Node(value);
-  //   let current = this.head;
-  //   if (!current) {
-  //     this.head = node;
-  //     this.tail = node;
-  //   } else {
-  //     while (current) {
-  //       const { next } = current;
-  //       if (!next) {
-  //         current.next = node;
-  //         node.previous = current;
-  //         this.tail = node;
-  //         break;
-  //       } else if (comparator(current.value)) {
-  //         node.next = next;
-  //         next.previous = node;
-  //         current.next = node;
-  //         node.previous = current;
-  //         break;
-  //       }
-  //       current = next;
-  //     }
-  //   }
-  //   this.listSize += 1;
-  // }
+  insertAfter(value, after) {
+    const comparator = isFunction(after) ? after : defaultComparator(after);
+    const node = new Node(value);
+    let current = this.head;
+    if (!current) {
+      this.head = node;
+      this.tail = node;
+    } else {
+      while (current) {
+        const { next } = current;
+        if (!next) {
+          current.next = node;
+          node.previous = current;
+          this.tail = node;
+          break;
+        } else if (comparator(current.value)) {
+          node.next = next;
+          next.previous = node;
+          current.next = node;
+          node.previous = current;
+          break;
+        }
+        current = next;
+      }
+    }
+    this.listSize += 1;
+  }
 
-  // insertAfter(value, after) {
-  //   const comparator = isFunction(after) ? after : defaultComparator(after);
-  //   const node = new Node(value);
-  //   let current = this.head;
-  //   if (!current) {
-  //     this.head = node;
-  //   } else {
-  //     while (current) {
-  //       const { next } = current;
-  //       if (!next) {
-  //         current.next = node;
-  //         break;
-  //       } else if (comparator(current.value)) {
-  //         node.next = next;
-  //         current.next = node;
-  //         break;
-  //       }
-  //       current = next;
-  //     }
-  //   }
-  //   this.listSize += 1;
-  // }
-
-  // insertBefore(value, before) {
-  //   const comparator = isFunction(before) ? before : defaultComparator(before);
-  //   const node = new Node(value);
-  //   let current = this.head;
-  //   if (!current) {
-  //     this.head = node;
-  //   } else {
-  //     while (current) {
-  //       const { next } = current;
-  //       if (!next) {
-  //         current.next = node;
-  //         break;
-  //       } else if (comparator(next.value)) {
-  //         node.next = next;
-  //         current.next = node;
-  //         break;
-  //       }
-  //       current = next;
-  //     }
-  //   }
-  //   this.listSize += 1;
-  // }
+  insertBefore(value, after) {
+    const comparator = isFunction(after) ? after : defaultComparator(after);
+    const node = new Node(value);
+    let current = this.head;
+    if (!current) {
+      this.head = node;
+      this.tail = node;
+      this.listSize += 1;
+      return;
+    }
+    while (current) {
+      const { next, previous, value: currentValue } = current;
+      if (comparator(currentValue)) {
+        node.next = current;
+        node.previous = previous;
+        if (previous) {
+          previous.next = node;
+        }
+        current.previous = node;
+        if (this.head === current) {
+          this.head = node;
+        }
+        this.listSize += 1;
+        return;
+      }
+      current = next;
+    }
+    current = this.tail;
+    current.next = node;
+    node.previous = current;
+    this.tail = node;
+    this.listSize += 1;
+  }
 
   search(value) {
     const comparator = isFunction(value) ? value : defaultComparator(value);

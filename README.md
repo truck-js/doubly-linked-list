@@ -16,60 +16,60 @@ $ npm install --save @truck/doubly-linked-list
 
 ## Methods
 
-### _Methods >_ `constructor()`
+### `constructor()`
 
 Build a new _Doubly Linked-List_.
 
-### _Methods >_ `delete(value: any): boolean` (_O(n)_)
+### `delete(value: any): boolean`
 
-Deletes a value from the _Doubly Linked-List_. The default `===` comparator is used.
+**O(n)**. Deletes a value from the _Doubly Linked-List_. The default `===` comparator is used.
 
-### _Methods >_ `delete(comparator: (value: any) => boolean): boolean` (_O(n)_)
+### `delete(comparator: (value: any) => boolean): boolean`
 
-Deletes a value from the _Doubly Linked-List_. Uses the `comparator` to determine whether the
-`value` should be deleted.
+**O(n)**. Deletes a value from the _Doubly Linked-List_. Uses the `comparator` to determine whether
+the `value` should be deleted.
 
-### _Methods >_ `insert(value: any): void` (_O(1)_)
+### `insert(value: any): void`
 
-Inserts a value at the beginning of the _Doubly Linked-List_.
+**O(1)**. Inserts a value at the beginning of the _Doubly Linked-List_.
 
-### _Methods >_ `insertAfter(value: any, after: any): void` (_O(n)_)
+### `insertAfter(value: any, after: any): void`
 
-Inserts `value` after `after`. If `after` is not found `value` is inserted at the end of the
-_Doubly Linked-List_.
+**O(n)**. Inserts `value` after `after`. If `after` is not found `value` is inserted at the end of
+the _Doubly Linked-List_.
 
-### _Methods >_ `insertAfter(value: any, comparator: (value: any) => boolean): void` (_O(n)_)
+### `insertAfter(value: any, comparator: (value: any) => boolean): void`
 
-Inserts `value` after `after` comparator returns `true`. If `after` does not return `true` then
-`value` is inserted at the end of the _Doubly Linked-List_.
+**O(n)**. Inserts `value` after `after` comparator returns `true`. If `after` does not return `true`
+then `value` is inserted at the end of the _Doubly Linked-List_.
 
-### _Methods >_ `insertBefore(value: any, before: any): void` (_O(n)_)
+### `insertBefore(value: any, before: any): void`
 
-Inserts `value` before `before`. If `before` is not found `value` is inserted at the end of the
-_Doubly Linked-List_.
+**O(n)**. Inserts `value` before `before`. If `before` is not found `value` is inserted at the end
+of the _Doubly Linked-List_.
 
-### _Methods >_ `insertBefore(value: any, comparator: (value: any) => boolean): void` (_O(n)_)
+### `insertBefore(value: any, comparator: (value: any) => boolean): void`
 
-Inserts `value` before `before` comparator returns `true`. If `before` does not return `true` then
-`value` is inserted at the end of the _Doubly Linked-List_.
+**O(n)**. Inserts `value` before `before` comparator returns `true`. If `before` does not return
+`true` then `value` is inserted at the end of the _Doubly Linked-List_.
 
-### _Methods >_ `search(value: any): Node|undefined` (_O(n)_)
+### `search(value: any): Node|undefined`
 
-Returns the first `value` in the _Doubly Linked-List_ that matches `value`. The default `===`
-comparator is used.
+**O(n)**. Returns the first `value` in the _Doubly Linked-List_ that matches `value`. The default
+`===` comparator is used.
 
-### _Methods >_ `search(comparator: (value: any) => boolean): Node|undefined` (_O(n)_)
+### `search(comparator: (value: any) => boolean): Node|undefined`
 
-Returns the first `value` in the _Doubly Linked-List_ that matches. Uses `comparator` to determine
-whether the `value` matches.
+**O(n)**. Returns the first `value` in the _Doubly Linked-List_ that matches. Uses `comparator` to
+determine whether the `value` matches.
 
-### _Methods >_ `toArray(): any[]` (_O(n)_)
+### `toArray(): any[]`
 
-Converts the _Doubly Linked-List_'s values to an array.
+**O(n)**. Converts the _Doubly Linked-List_'s values to an array.
 
 ## Properties
 
-### _Properties >_ `.length: number`
+### `.length: number`
 
 Returns the current length of the _Doubly Linked-List_.
 
@@ -119,7 +119,7 @@ Use the following command to run all the tests described below together:
 $ docker-compose run --rm app npm test
 ```
 
-### _Testing >_ Commit messages
+### Commit messages
 
 Commit messages are linted through the use of [husky](https://www.npmjs.com/package/husky) and
 [@commitlint/cli](https://www.npmjs.com/package/@commitlint/cli) using the
@@ -133,7 +133,7 @@ to get a better understanding of how commit messages are formatted.
 After doing an `npm install` the required git hooks wil be added automatically and commit messages
 will be linted automatically.
 
-### _Testing >_ Linting
+### Linting
 
 Linting is done using [eslint](https://eslint.org/) using the
 [eslint-config-airbnb-base](https://www.npmjs.com/package/eslint-config-airbnb-base) configuration
@@ -146,7 +146,7 @@ Linting can be run in isolation through the command:
 $ docker-compose run --rm app npm run test:lint
 ```
 
-### _Testing >_ Auditing
+### Auditing
 
 Auditing of dependencies is done through the [npm audit](https://docs.npmjs.com/cli/audit)
 command-line tool.
@@ -157,7 +157,7 @@ Auditing can be run in isolation through the command:
 $ docker-compose run --rm app npm run test:vulnerabilities
 ```
 
-### _Testing >_ Unit testing
+### Unit testing
 
 Unit testing is done with [jest](https://jestjs.io). The test file for each file to be tested is to
 be placed alongside the file in testing and marked with the `.test.js` extension.
@@ -173,7 +173,7 @@ $ docker-compose run --rm app npm run test:scripts
 Contributions are always welcome, just submit a PR to get the conversation going. Please make sure
 all tests pass before submitting a PR.
 
-### _Contributing >_ Releases
+### Releases
 
 The moment a PR is merged into the `master` branch
 [semantic-release](https://github.com/semantic-release/semantic-release) will kick-off a new

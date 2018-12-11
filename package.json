@@ -17,7 +17,9 @@
     "travis-deploy-once": "travis-deploy-once"
   },
   "keywords": [
-    "Queue",
+    "Doubly",
+    "Linked-List",
+    "Linked List",
     "Data Structure"
   ],
   "author": "Hendrik Volschenk <righteous.trespasser@gmail.com>",
@@ -36,7 +38,7 @@
     "eslint-plugin-import": "^2.14.0",
     "husky": "^1.2.0",
     "jest": "^23.6.0",
-    "semantic-release": "^15.12.4",
+    "semantic-release": "^15.12.5",
     "travis-deploy-once": "^5.0.9"
   },
   "repository": {

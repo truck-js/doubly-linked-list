@@ -191,133 +191,285 @@ describe('.insert()', () => {
 
   beforeAll(() => {
     doublyLinkedList = new DoublyLinkedList();
-    doublyLinkedList.insert(1);
-    doublyLinkedList.insert(2);
-    doublyLinkedList.insert(3);
   });
 
-  test('Inserts the correct amount of nodes', () => {
-    expect(doublyLinkedList.length).toBe(3);
+  describe('Inserts an initial value', () => {
+    beforeAll(() => doublyLinkedList.insert(1));
+
+    test('Inserts the new value as \'head\'', () => {
+      expect(doublyLinkedList.head.value).toBe(1);
+    });
+
+    test('Inserts the new value as \'tail\'', () => {
+      expect(doublyLinkedList.tail.value).toBe(1);
+    });
+
+    test('Has no \'next\'', () => {
+      expect(doublyLinkedList.head.next).toBe(undefined);
+    });
+
+    test('Has no \'previous\'', () => {
+      expect(doublyLinkedList.head.previous).toBe(undefined);
+    });
+
+    test('Updates the length of the list correctly', () => {
+      expect(doublyLinkedList.length).toBe(1);
+    });
   });
 
-  test('Adds the correct value as \'head\'', () => {
-    expect(doublyLinkedList.head.value).toBe(3);
-  });
+  describe('Inserts a second value', () => {
+    beforeAll(() => doublyLinkedList.insert(2));
 
-  test('Pushes the correct value to \'tail\'', () => {
-    expect(doublyLinkedList.tail.value).toBe(1);
+    test('Inserts the new value as \'head\'', () => {
+      expect(doublyLinkedList.head.value).toBe(2);
+    });
+
+    test('Keeps the initial value as \'tail\'', () => {
+      expect(doublyLinkedList.tail.value).toBe(1);
+    });
+
+    test('Has the initial value as \'next\'', () => {
+      expect(doublyLinkedList.head.next.value).toBe(1);
+    });
+
+    test('Has no \'previous\'', () => {
+      expect(doublyLinkedList.head.previous).toBe(undefined);
+    });
+
+    test('Adds the second value as the initial value\'s \'previous\'', () => {
+      expect(doublyLinkedList.tail.previous.value).toBe(2);
+    });
+
+    test('Updates the length of the list correctly', () => {
+      expect(doublyLinkedList.length).toBe(2);
+    });
   });
 });
 
-// describe('.insertAfter()', () => {
-//   const VALUE_ONE = 'VALUE_ONE';
-//   const VALUE_TWO = 'VALUE_TWO';
-//   const VALUE_THREE = { three: 'three' };
-//   const VALUE_FOUR = 'VALUE_FOUR';
-//   const VALUE_FIVE = 'VALUE_FIVE';
-//
-//   let doublyLinkedList;
-//
-//   beforeAll(() => {
-//     doublyLinkedList = new DoublyLinkedList();
-//   });
-//
-//   test('Adds the value as \'head\' if no value exists', () => {
-//     const expected = VALUE_ONE;
-//
-//     doublyLinkedList.insertAfter(VALUE_ONE, 12);
-//     const actual = doublyLinkedList.head.value;
-//
-//     expect(actual).toBe(expected);
-//   });
-//
-//   test('Adds the value at the end if the given \'before\' is not found', () => {
-//     const expected = VALUE_TWO;
-//
-//     doublyLinkedList.insertAfter(VALUE_TWO, 12);
-//     const actual = doublyLinkedList.head.next.value;
-//
-//     expect(actual).toBe(expected);
-//   });
-//
-//   test('Adds the value after the given value if \'after\' is found', () => {
-//     const expected = VALUE_THREE;
-//
-//     doublyLinkedList.insertAfter(VALUE_THREE, VALUE_TWO);
-//     const actual = doublyLinkedList.head.next.next.value;
-//
-//     expect(actual).toBe(expected);
-//   });
-//
-//   test('Adds the value after the given value if \'after\' is a comparator that returns \'true\'', () => {
-//     const expected = VALUE_FIVE;
-//
-//     doublyLinkedList.insertAfter(VALUE_FOUR, value => value.three === 'three');
-//     doublyLinkedList.insertAfter(VALUE_FIVE, value => value.three === 'three');
-//     const actual = doublyLinkedList.head.next.next.next.value;
-//
-//     expect(actual).toBe(expected);
-//   });
-//
-//   test('Increments the list length correctly', () => {
-//     expect(doublyLinkedList.length).toBe(5);
-//   });
-// });
+describe('.insertAfter()', () => {
+  let doublyLinkedList;
 
-// describe('.insertBefore()', () => {
-//   const VALUE_ONE = 'VALUE_ONE';
-//   const VALUE_TWO = 'VALUE_TWO';
-//   const VALUE_THREE = { three: 'three' };
-//   const VALUE_FOUR = 'VALUE_FOUR';
-//   const VALUE_FIVE = { five: 'five' };
-//
-//   let doublyLinkedList;
-//
-//   beforeAll(() => {
-//     doublyLinkedList = new DoublyLinkedList();
-//   });
-//
-//   test('Adds the value as \'head\' if no values exist', () => {
-//     const expected = VALUE_ONE;
-//
-//     doublyLinkedList.insertBefore(VALUE_ONE, 12);
-//     const actual = doublyLinkedList.head.value;
-//
-//     expect(actual).toBe(expected);
-//   });
-//
-//   test('Adds the value at the end if the given \'before\' is not found', () => {
-//     const expected = VALUE_TWO;
-//
-//     doublyLinkedList.insertBefore(VALUE_TWO, 12);
-//     const actual = doublyLinkedList.head.next.value;
-//
-//     expect(actual).toBe(expected);
-//   });
-//
-//   test('Adds the value before the given value if \'before\' is found', () => {
-//     const expected = VALUE_THREE;
-//
-//     doublyLinkedList.insertBefore(VALUE_THREE, VALUE_TWO);
-//     const actual = doublyLinkedList.head.next.value;
-//
-//     expect(actual).toBe(expected);
-//   });
-//
-//   test('Adds the value before the given value if \'before\' is a comparator that returns \'true\'', () => {
-//     const expected = VALUE_FOUR;
-//
-//     doublyLinkedList.insertBefore(VALUE_FIVE, VALUE_TWO);
-//     doublyLinkedList.insertBefore(VALUE_FOUR, value => value.five === 'five');
-//     const actual = doublyLinkedList.head.next.next.value;
-//
-//     expect(actual).toBe(expected);
-//   });
-//
-//   test('Increments the list length correctly', () => {
-//     expect(doublyLinkedList.length).toBe(5);
-//   });
-// });
+  beforeAll(() => {
+    doublyLinkedList = new DoublyLinkedList();
+  });
+
+  describe('inserts a value if no values exist in the list', () => {
+    beforeAll(() => doublyLinkedList.insertAfter(1, 1000));
+
+    test('Adds the value as \'head\'', () => {
+      expect(doublyLinkedList.head.value).toBe(1);
+    });
+
+    test('Adds the value as \'tail\'', () => {
+      expect(doublyLinkedList.tail.value).toBe(1);
+    });
+
+    test('Has no \'next\'', () => {
+      expect(doublyLinkedList.head.next).toBe(undefined);
+    });
+
+    test('Has no \'previous\'', () => {
+      expect(doublyLinkedList.head.previous).toBe(undefined);
+    });
+
+    test('Updates the length of the list correctly', () => {
+      expect(doublyLinkedList.length).toBe(1);
+    });
+  });
+
+  describe('Inserts a value at the end of the list', () => {
+    beforeAll(() => doublyLinkedList.insertAfter(2, 1000));
+
+    test('Adds the value as \'tail\'', () => {
+      expect(doublyLinkedList.tail.value).toBe(2);
+    });
+
+    test('Keeps the original \'head\' as it was', () => {
+      expect(doublyLinkedList.head.value).toBe(1);
+    });
+
+    test('Has no \'next\'', () => {
+      expect(doublyLinkedList.tail.next).toBe(undefined);
+    });
+
+    test('Adds the initial value as \'previous\'', () => {
+      expect(doublyLinkedList.tail.previous.value).toBe(1);
+    });
+
+    test('Adds the new value as \'next\' to the one before it', () => {
+      expect(doublyLinkedList.head.next.value).toBe(2);
+    });
+
+    test('Updates the length of the list correctly', () => {
+      expect(doublyLinkedList.length).toBe(2);
+    });
+  });
+
+  describe('Inserts a value after the first one', () => {
+    beforeAll(() => doublyLinkedList.insertAfter(3, 1));
+
+    test('Keeps the original \'tail\' as it was', () => {
+      expect(doublyLinkedList.tail.value).toBe(2);
+    });
+
+    test('Keeps the original \'head\' as it was', () => {
+      expect(doublyLinkedList.head.value).toBe(1);
+    });
+
+    test('Has no \'next\'', () => {
+      expect(doublyLinkedList.tail.next).toBe(undefined);
+    });
+
+    test('Adds the new value as \'previous\' to the one after it', () => {
+      expect(doublyLinkedList.tail.previous.value).toBe(3);
+    });
+
+    test('Adds the new value as \'next\' to the one before it', () => {
+      expect(doublyLinkedList.head.next.value).toBe(3);
+    });
+
+    test('Updates the length of the list correctly', () => {
+      expect(doublyLinkedList.length).toBe(3);
+    });
+  });
+
+  describe('Inserts a value with a custom comparator', () => {
+    beforeAll(() => doublyLinkedList.insertAfter(4, value => value === 2));
+
+    test('Adds the value as \'tail\'', () => {
+      expect(doublyLinkedList.tail.value).toBe(4);
+    });
+
+    test('Keeps the original \'head\' as it was', () => {
+      expect(doublyLinkedList.head.value).toBe(1);
+    });
+
+    test('Has no \'next\'', () => {
+      expect(doublyLinkedList.tail.next).toBe(undefined);
+    });
+
+    test('Adds the value before it as \'previous\'', () => {
+      expect(doublyLinkedList.tail.previous.value).toBe(2);
+    });
+
+    test('Updates the length of the list correctly', () => {
+      expect(doublyLinkedList.length).toBe(4);
+    });
+  });
+});
+
+describe('.insertBefore()', () => {
+  let doublyLinkedList;
+
+  beforeAll(() => {
+    doublyLinkedList = new DoublyLinkedList();
+  });
+
+  describe('inserts a value if no values exist in the list', () => {
+    beforeAll(() => doublyLinkedList.insertBefore(1, 1000));
+
+    test('Adds the value as \'head\'', () => {
+      expect(doublyLinkedList.head.value).toBe(1);
+    });
+
+    test('Adds the value as \'tail\'', () => {
+      expect(doublyLinkedList.tail.value).toBe(1);
+    });
+
+    test('Has no \'next\'', () => {
+      expect(doublyLinkedList.head.next).toBe(undefined);
+    });
+
+    test('Has no \'previous\'', () => {
+      expect(doublyLinkedList.head.previous).toBe(undefined);
+    });
+
+    test('Updates the length of the list correctly', () => {
+      expect(doublyLinkedList.length).toBe(1);
+    });
+  });
+
+  describe('Inserts a value at the end of the list', () => {
+    beforeAll(() => doublyLinkedList.insertBefore(2, 1000));
+
+    test('Adds the value as \'tail\'', () => {
+      expect(doublyLinkedList.tail.value).toBe(2);
+    });
+
+    test('Keeps the original \'head\' as it was', () => {
+      expect(doublyLinkedList.head.value).toBe(1);
+    });
+
+    test('Has no \'next\'', () => {
+      expect(doublyLinkedList.tail.next).toBe(undefined);
+    });
+
+    test('Adds the initial value as \'previous\'', () => {
+      expect(doublyLinkedList.tail.previous.value).toBe(1);
+    });
+
+    test('Adds the new value as \'next\' to the one before it', () => {
+      expect(doublyLinkedList.head.next.value).toBe(2);
+    });
+
+    test('Updates the length of the list correctly', () => {
+      expect(doublyLinkedList.length).toBe(2);
+    });
+  });
+
+  describe('Inserts a value before the first one', () => {
+    beforeAll(() => doublyLinkedList.insertBefore(3, 1));
+
+    test('Keeps the original \'tail\' as it was', () => {
+      expect(doublyLinkedList.tail.value).toBe(2);
+    });
+
+    test('Adds the value as \'head\'', () => {
+      expect(doublyLinkedList.head.value).toBe(3);
+    });
+
+    test('Add the initial value as \'next\'', () => {
+      expect(doublyLinkedList.head.next.value).toBe(1);
+    });
+
+    test('Has no \'previous\'', () => {
+      expect(doublyLinkedList.head.previous).toBe(undefined);
+    });
+
+    test('Adds the new value as \'previous\' to the one after it', () => {
+      expect(doublyLinkedList.tail.previous.previous.value).toBe(3);
+    });
+
+    test('Updates the length of the list correctly', () => {
+      expect(doublyLinkedList.length).toBe(3);
+    });
+  });
+
+  describe('Inserts a value with a custom comparator', () => {
+    beforeAll(() => doublyLinkedList.insertBefore(4, value => value === 2));
+
+    test('Keeps the original \'tail\' as it was', () => {
+      expect(doublyLinkedList.tail.value).toBe(2);
+    });
+
+    test('Keeps the original \'head\' as it was', () => {
+      expect(doublyLinkedList.head.value).toBe(3);
+    });
+
+    test('Adds the value after it as \'next\'', () => {
+      expect(doublyLinkedList.tail.previous.next.value).toBe(2);
+    });
+
+    test('Adds the value before it as \'previous\'', () => {
+      expect(doublyLinkedList.tail.previous.previous.value).toBe(1);
+    });
+
+    test('Updates the length of the list correctly', () => {
+      expect(doublyLinkedList.length).toBe(4);
+    });
+  });
+});
+
 
 describe('.search()', () => {
   let doublyLinkedList;
