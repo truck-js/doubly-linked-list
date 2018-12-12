@@ -509,17 +509,26 @@ describe('.toArray()', () => {
     expect(doublyLinkedList.toArray()).toEqual([]);
   });
 
-  test('Returns an array of items inside the DoublyLinkedList', () => {
-    const VALUE_A = 'VALUE_A';
-    const VALUE_B = 'VALUE_B';
-    const VALUE_C = 'VALUE_C';
-    const expected = [VALUE_A, VALUE_B, VALUE_C];
+  describe('After values have been inserted', () => {
+    beforeAll(() => {
+      doublyLinkedList.insert(1);
+      doublyLinkedList.insert(2);
+      doublyLinkedList.insert(3);
+      doublyLinkedList.insert(4);
+      doublyLinkedList.insert(5);
+    });
 
-    doublyLinkedList.insert(VALUE_C);
-    doublyLinkedList.insert(VALUE_B);
-    doublyLinkedList.insert(VALUE_A);
-    const actual = doublyLinkedList.toArray();
+    test('Returns an array of items inside the DoublyLinkedList', () => {
+      expect(doublyLinkedList.toArray()).toEqual([5, 4, 3, 2, 1]);
+    });
 
-    expect(actual).toEqual(expected);
+    test('Can be used as a \'map\' method if passed a callback', () => {
+      const callback = node => (node.value + ((node.next && node.next.value) || 0));
+      const expected = [9, 7, 5, 3, 1];
+
+      const actual = doublyLinkedList.toArray(callback);
+
+      expect(actual).toEqual(expected);
+    });
   });
 });
